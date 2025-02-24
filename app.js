@@ -4,6 +4,10 @@ import { createUserWithEmailAndPassword ,signInWithPopup } from "https://www.gst
 import { auth, db,provider , GoogleAuthProvider} from "./firebaseSetup.js";
 import { addDoc, collection } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 
+document.querySelector("#already_btn").addEventListener("click",() => {
+    window.location.assign("./pages/login/login.html");
+})
+
 let pushUserData = async (user) => {
     try {
         const docRef = await addDoc(collection(db, "users"), {
@@ -27,7 +31,7 @@ let userSignUp = async (email, password) => {
             const user = userCredential.user;
             console.log("userData", user);
             pushUserData(user).then(() => {
-                window.location.replace("./pages/login/login.html");
+                window.location.assign("./pages/login/login.html");
             });
         })
         .catch((error) => {

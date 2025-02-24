@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-import { auth} from "./firebaseSetup.js";
+import { auth} from "/firebaseSetup.js";
 // import { addDoc, collection } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 
 let signIn = async (email,pass) => {
