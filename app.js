@@ -24,7 +24,7 @@ let pushUserData = async (user) => {
     }
 }
 
-let userSignUp = async (email, password) => {
+let userSignUp = async (email, password , phone_no) => {
     await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed up
@@ -32,6 +32,8 @@ let userSignUp = async (email, password) => {
             console.log("userData", user);
             pushUserData(user).then(() => {
                 window.location.assign("./pages/login/login.html");
+                localStorage.setItem(JSON.stringify("loggedInUser",user.uid));
+                // console.log("pushed");
             });
         })
         .catch((error) => {
@@ -44,15 +46,20 @@ let userSignUp = async (email, password) => {
 
 
 document.querySelector("#signUp-btn").addEventListener("click", () => {
+    let displayName = document.querySelector("#name").value;
     let emailValue = document.querySelector("#email").value;
     let passwordValue = document.querySelector("#password").value;
     let phoneNo = document.querySelector("#phoneNo").value;
-
-    userSignUp(emailValue, passwordValue,phoneNo);
+    
+    if((displayName && emailValue && passwordValue && phoneNo) === "" ){
+        alert("plz fill all the feilds");
+    }
+    userSignUp(emailValue, passwordValue,phoneNo,displayName);
 });
 
 /// signup with google
 document.querySelector("#google-signUp").addEventListener('click',()=>{
+
     signInWithPopup(auth, provider)
       .then(async(result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
