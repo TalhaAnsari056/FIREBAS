@@ -1,8 +1,8 @@
 
-// if (!JSON.parse(localStorage.getItem('loggedInUser'))) {
-//     window.location.replace("../../index.html");
-//     console.log("redirected successfully");
-// }
+if (!JSON.parse(localStorage.getItem('loggedInUser'))) {
+    window.location.replace("../../index.html");
+    console.log("redirected successfully");
+}
 import {
     addDoc,
     collection,
