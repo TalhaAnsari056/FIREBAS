@@ -8,7 +8,7 @@ document.querySelector("#already_btn").addEventListener("click", () => {
     window.location.assign("./pages/login/login.html");
 })
 
-
+console.log(db);
 let pushUserData = async (user, d_name, F_no) => {
     try {
         const docRef = await addDoc(collection(db, "users"), {

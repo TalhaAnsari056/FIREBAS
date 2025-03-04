@@ -1,12 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dashboard</title>
+    <!-- Latest compiled and minified CSS -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+
+<!-- Optional theme -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+
+<!-- Latest compiled and minified JavaScript -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
 </head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    #navigation_links>div:hover {
+        background-color: rgb(33, 204, 147);
+        cursor: pointer;
+        /* text-decoration: underline; */
+        transition: 0.8s;
+
+    }
+    img:hover{
+        box-shadow: 5px 5px 5px;
+        transition: 0.4s;
+    }
+</style>
+
 <body>
-    <h1>Dashboard</h1>
+    <nav id="navbar" style="width: 100%;height: 80px; margin: 0px;padding: 10px; background-color: rgb(167, 167, 247);">
+        <div class="container" style="justify-content: space-between;display: flex; ">
+            <span id="heading_span"
+                style="font-size: 40px;  font-weight: bolder; font-family: Georgia, 'Times New Roman', Times, serif;">Dashboard</span>
+            <span>
+                <span class="img_span">
+                    <span id="loggedInUser_name" style=" font-size: 30px;"></span>
+                    <span style="visibility: hidden;">vdcff</span>
+                    <img src="pic.png" alt="profile" title="go to your profile"
+                        style="width: 60px;height: 60px; border-radius: 50%;">
+                    <span style="visibility: hidden;">vd</span>
+                </span>
+
+        </div>
+
+    </nav>
+    <div id="navigation_links"
+        style="width: 300px; height: auto; background-color: rgb(101, 98, 133);margin-left: 500px; display: flex;text-align: center;justify-content: space-between;text-align: center; ">
+        <div class="hovering" id="uers_page" style="font-size: 30px;font-weight: bold; " >All Users</div>
+        <!-- <hr> -->
+        <div class="hovering" id="profile_page" style="font-size: 30px;font-weight: bold;" >Your Profile</div>
+    </div>
     <button id="signout-btn">Sign out</button>
     <br> <br>
     <input type="text" id="post-inp">
@@ -15,10 +63,22 @@
     <h1>All posts of users</h1>
     <div id="allPosts"></div>
     <h1>My posts</h1>
-    <div id="myPosts"></div>
+    <div id="mmyPostDiv"></div>
+    
+    <!-- <div class="dropdown-center">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Centered dropdown
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Action two</a></li>
+          <li><a class="dropdown-item" href="#">Action three</a></li>
+        </ul>
+      </div> -->
 
 
 
     <script type="module" src="./dashboard.js"></script>
 </body>
+
 </html>

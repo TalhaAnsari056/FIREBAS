@@ -4,16 +4,16 @@ import { auth} from "/firebaseSetup.js";
 let emailValue = document.querySelector("#email").value;
 let passwordValue = document.querySelector("#password").value;
 let signIn = async (email,pass) => {
-  if((emailValue && passwordValue) === "" ){
-    alert("plz fill all the feilds");
-}
+//   if((emailValue && passwordValue) === "" ){
+//     alert("plz fill all the feilds");
+// }
     await signInWithEmailAndPassword(auth, email,pass)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         console.log("login success: ", user);
         // ...
-          localStorage.setItem('loggedInUser', user.uid)
+          localStorage.setItem('loggedInUser', user.uid);
           window.location.replace('../dashboard/dashboard.html');
       })
       .catch((error) => {
