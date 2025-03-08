@@ -2,13 +2,14 @@
 
 import { createUserWithEmailAndPassword, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 import { auth, db, provider, GoogleAuthProvider } from "./firebaseSetup.js";
-import { addDoc, collection } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+import { addDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 
 document.querySelector("#already_btn").addEventListener("click", () => {
-    window.location.assign("./pages/login/login.html");
-})
-
-console.log(db);
+    window.location.replace("./pages/login/login.html");
+});
+if (localStorage.getItem('loggedInUser')) {
+    window.location.replace("./pages/login/login.html");
+}
 let pushUserData = async (user, d_name, F_no) => {
     try {
         const docRef = await addDoc(collection(db, "users"), {
@@ -17,6 +18,21 @@ let pushUserData = async (user, d_name, F_no) => {
             photoURL: user.photoURL,
             displayName: d_name,
             phoneNumber: F_no,
+            uid: user.uid,
+        });
+        console.log('document Id', docRef.id);
+    } catch (e) {
+        console.error("data pushing error", e)
+    }
+}
+let pushUserData_byGoogle = async (user) => {
+    try {
+        const docRef = await addDoc(collection(db, "users"), {
+
+            email: user.email,
+            photoURL: user.photoURL,
+            displayName: user.displayName,
+            phoneNumber: user.phoneNumber,
             uid: user.uid,
         });
         console.log('document Id', docRef.id);
@@ -40,8 +56,8 @@ let userSignUp = async (email, password) => {
             //     return;
             // }
             pushUserData(user, displayName, phoneNo).then(() => {
-                window.location.assign("./pages/login/login.html");
-                localStorage.setItem("loggedInUser", JSON.stringify(user.uid));
+                window.location.replace("./pages/dashboard/dashboard.html");
+                localStorage.setItem("loggedInUser", user.uid);
                 // console.log("pushed");
             });
         })
@@ -54,20 +70,45 @@ let userSignUp = async (email, password) => {
 }
 
 
-document.querySelector("#signUp-btn").addEventListener("click", () => {
-    let emailValue = document.querySelector("#email").value;
-    let passwordValue = document.querySelector("#password").value;
+var emailValue = document.querySelector("#email").value;
+var passwordValue = document.querySelector("#password").value;
+const signUp_btn = document.getElementById("signUp-btn");
+signUp_btn.addEventListener("click", (event) => {
+    event.target.setAttribute("style", "opacity:0.5");
+    setTimeout(() => {
+        event.target.removeAttribute("style");
+    }, 200);
+
     // if (emailValue || passwordValue === "") {
     //     alert("plz fill all the feilds");
     //     return;
     // }
     userSignUp(emailValue, passwordValue);
 });
+// checking
+let checking = async (existing_email) => {
 
+    const q = query(collection(db, "users"), where("email", "==", existing_email));
+    console.log(q)
+    const querySnapshot = await getDocs(q);
+    console.log("Query Snapshot Size:", querySnapshot.size);
+    if (querySnapshot.size >= 1) {
+        alert("your have already created account with this google email.If you want to sign in with this email then click at Already have an account and then click on signIn with google ");
+        return true;
+    }
+    return false;
+    // if (querySnapshot.empty) {
+    //     console.log("No matching documents found!");
+
+    // }
+// querySnapshot.forEach((users) => {
+    //     console.log("User Found:", users.id, users.data());
+    // });
+}
 /// signup with google
-document.querySelector("#google-signUp").addEventListener('click', () => {
+document.querySelector("#google-signUp").addEventListener('click', async () => {
 
-    signInWithPopup(auth, provider)
+    await signInWithPopup(auth, provider)
         .then(async (result) => {
             // This gives you a Google Access Token. You can use it to access the Google API.
             const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -75,21 +116,61 @@ document.querySelector("#google-signUp").addEventListener('click', () => {
             // The signed-in user info.
             // console.log("result", result);
             const user = result.user;
-            // console.log("user", user);
-            pushUserData(user).then(() => {
-                window.location.assign("./pages/login/login.html");
-                localStorage.setItem("loggedInUser", JSON.stringify(user.uid));
-            });
+            console.log("user", user);
+
+            
+            let is_contain_existing_email = await checking(user.email);
+            console.log(is_contain_existing_email);
+
+            if (!is_contain_existing_email) {
+                console.log(is_contain_existing_email);
+
+                await pushUserData_byGoogle(user)
+                    .then(() => {
+                        localStorage.setItem("loggedInUser", user.uid);
+                        window.location.replace("./pages/dashboard/dashboard.html");
+                    });
+
+            }
+
         }).catch((error) => {
             // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.customData.email;
-            // The AuthCredential type that was used.
-            const credential = GoogleAuthProvider.credentialFromError(error);
+            // const errorCode = error.code;
+            // const errorMessage = error.message;
+            // // The email of the user's account used.
+            // const email = error.customData.email;
+            // // The AuthCredential type that was used.
+            // const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
-            console.error(errorMessage, errorCode, email, credential);
+             console.error(error);
+            // console.error(errorMessage, errorCode, email, credential);
         });
-})
 
+});
+
+// document.querySelector("#google-signUp").addEventListener('click', async () => {
+//     try {
+//         const result = await signInWithPopup(auth, provider);
+        
+//         // Check if user exists
+//         if (!result.user) {
+//             console.error("Google sign-in failed, no user returned.");
+//             return;
+//         }
+
+//         const user = result.user;
+//         console.log("user", user);
+
+//         let is_contain_existing_email = await checking(user.email);
+//         console.log("is_contain_existing_email:", is_contain_existing_email);
+
+//         if (!is_contain_existing_email) {
+//             await pushUserData_byGoogle(user);
+//             console.log("is_contain_existing_email:", is_contain_existing_email);
+//             localStorage.setItem("loggedInUser", user.uid);
+//         }
+
+//     } catch (error) {
+//         console.error("Error signing in with Google:", error);
+//     }
+// });

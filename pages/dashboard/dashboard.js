@@ -61,16 +61,32 @@ let createPost = async (loggedIn_user, text) => {
 };
 var loggedInUser = localStorage.getItem("loggedInUser");
 console.log(loggedInUser);
+// const q = query(collection(db, "users"), where("uid", "==", loggedInUser));
+// console.log(q)
+// const querySnapshot = await getDocs(q);
+// console.log("Query Snapshot Size:", querySnapshot.size);
+
+// if (querySnapshot.empty) {
+//     console.log("No matching documents found!");
+   
+// }
+
+// querySnapshot.forEach((users) => {
+//     console.log("User Found:", users.id, users.data());
+// });
 let getloggedInUser = async () => {
     try {
+      // console.log(loggedInUser);
       const q = query(collection(db, "users"), where("uid", "==", loggedInUser));
       const querySnapshot = await getDocs(q);
-      // console.log(q);
-      // console.log(querySnapshot);
       // myPostDiv.innerHTML = ''
+      // console.log(loggedInUser);
       querySnapshot.forEach((users) => {
+        console.log(querySnapshot);
+        // console.log(loggedInUser);
         // post.data() is never undefined for query post snapshots
         console.log(users.id, users.data(),users.data().displayName);
+        // console.log(q);
         var loggedInUser_Name = users.data().displayName ;
         console.log(loggedInUser_Name);
         var loggedInUser_name = document.querySelector("#loggedInUser_name");
@@ -78,7 +94,10 @@ let getloggedInUser = async () => {
         // myPostDiv.innerHTML += `${post.data().postText}
         //   <button id='${post.id}' class='update-btn'>edit</button>
         //   <br>`;
-  
+        
+      //   if (!querySnapshot.empty) {
+      //     console.log("No matching documents found!");
+      // }
         // // Add event listener for the edit button
         // document.getElementById(post.id).addEventListener("click", () => {
         //   updatePost(post.id);
@@ -90,18 +109,20 @@ let getloggedInUser = async () => {
   };
   getloggedInUser();
 
-// let getAllPosts = async () => {
-//   try {
-//     const posts = await getDocs(collection(db, "posts"));
-//     posts.forEach((post) => {
-//       console.log(post.data());
-//       allPostDiv.innerHTML += `<div>${post.data().postText}</div>
-//         <br>`;
-//     });
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
+let getAllPosts = async () => {
+  try {
+    const posts = await getDocs(collection(db, "posts"));
+    posts.forEach((post) => {
+      console.log(post.data());
+    var  allPostDiv = document.querySelector("#allPosts")
+      allPostDiv.innerHTML += `<div>${post.data().postText}</div>
+        <br>`;
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+getAllPosts();
 var myPostDiv = document.querySelector("#myPostDiv");
 // let getMyPosts = async () => {
 //   try {
@@ -129,10 +150,26 @@ document.querySelector("#add").addEventListener("click", () => {
   let postTxt = document.querySelector("#post-inp").value;
   console.log(postTxt);
   createPost(loggedInUser, postTxt );
+  postTxt = "";
 });
-let navigate_to_profile = () => {
-  window.location.assign("./profile.html");
-}
-let navigate_to_users = () => {
-  window.location.assign("./users.html");
-}
+document.querySelector("#profile_page").addEventListener("click",() => {
+  window.location.assign("./profile/profile.html");
+});
+document.querySelector("#uers_page").addEventListener("click",() => {
+  window.location.assign("./users/users.html");
+});
+document.querySelector("#profile_img").addEventListener("click",() => {
+  window.location.assign("./profile/profile.html");
+});
+document.querySelector("#profile_img").addEventListener("mouseover",() => {
+  var profile_img = document.querySelector("#profile_img");
+  profile_img.setAttribute("class" , "fa-solid fa-circle-plus fa-beat");
+  
+});
+document.querySelector("#profile_img").addEventListener("mouseout",() => {
+  var profile_img = document.querySelector("#profile_img");
+  profile_img.removeAttribute("class" );
+  
+});
+
+

@@ -5,79 +5,264 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dashboard</title>
-    <!-- Latest compiled and minified CSS -->
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-<!-- Optional theme -->
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
 
-<!-- Latest compiled and minified JavaScript -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+    <!-- Optional theme -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+
+    <!-- Latest compiled and minified JavaScript -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+
 </head>
 <style>
-    *{
+    * {
         padding: 0;
         margin: 0;
     }
-    #navigation_links>div:hover {
+
+    #navbaar {
+        width: 100%;
+        height: 80px;
+        margin: 0px;
+        padding: 10px;
+        background-color: rgb(167, 167, 247);
+    }
+
+    .containr {
+        justify-content: space-between;
+        display: flex;
+    }
+
+    #heading_span {
+        font-size: 40px;
+        font-weight: bolder;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        /* margin-left: 0px 0px; */
+    }
+
+    #icons {
+        font-size: 25px;
+    }
+
+    #loggedInUser_name {
+        font-size: 30px;
+    }
+
+    #profile_img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+    }
+
+    /* .btn btn-secondary dropdown-toggle{
+    background-color: rgb(167, 167, 247);
+    border: none;
+    color: black;
+} */
+    #navegation_links {
+        width: 300px;
+        height: 65px;
+        /* background-color: rgb(101, 98, 133); */
+        margin-left: 500px;
+        display: flex;
+        /* text-align: center; */
+        justify-content: space-between;
+        border: none !important
+    }
+
+    #profile_page:hover {
         background-color: rgb(33, 204, 147);
         cursor: pointer;
         /* text-decoration: underline; */
         transition: 0.8s;
-
+        /* border: 1px solid black; */
+        /* transform: scale(0.9) ; */
     }
-    img:hover{
+
+    #uers_page:hover {
+        background-color: rgb(33, 204, 147);
+        transition: 0.8s;
+        cursor: pointer;
+        /* text-decoration: underline; */
+        /* border: 1px solid black; */
+    }
+
+    #uers_page {
+        font-size: 25px;
+        font-weight: bold;
+        width: 400px;
+        height: 65px;
+        border: none;
+    }
+
+    #profile_page {
+        font-size: 25px;
+        font-weight: bold;
+        width: 500px;
+        height: 65px;
+        border: none;
+    }
+
+    img:hover {
         box-shadow: 5px 5px 5px;
         transition: 0.4s;
+        cursor: pointer;
+    }
+
+    #dots_icon:hover {
+            opacity: 0.5!important;
+            border: 0.5px solid black !important;
+            border-radius: 80%;
+            transition: 0.6s!important;
+
+        }
+        #allPosts{
+            text-align: center;
+            font-size: 25px;
+            margin-top: 0px;
+            width: 500px;
+            height: auto;
+            /* border: 1px solid black; */
+            box-shadow: 5px 5px 10px rgb(204, 169, 116);;
+            border-radius: 30px;
+            position:absolute;
+            background-color: blanchedalmond;
+
+        }
+
+
+    @media (max-width: 900px) {
+
+        /* Navbar adjustments */
+        #navbaar {
+            height: auto;
+            padding: 15px;
+        }
+
+        .containr {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #heading_span {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #loggedInUser_name {
+            font-size: 22px;
+        }
+
+        #profile_img {
+            width: 50px;
+            height: 50px;
+        }
+
+        #icons {
+            font-size: 20px;
+            margin-top: 5px;
+        }
+
+        /* Navigation links container adjustments */
+        #navegation_links {
+            width: 90%;
+            height: auto;
+            margin: 20px auto;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+        }
+        /* Stack buttons vertically */
+        #uers_page,
+        #profile_page {
+            width: 90%;
+            height: 50px;
+            font-size: 20px;
+            margin: 5px 0;
+        }
     }
 </style>
 
 <body>
-    <nav id="navbar" style="width: 100%;height: 80px; margin: 0px;padding: 10px; background-color: rgb(167, 167, 247);">
-        <div class="container" style="justify-content: space-between;display: flex; ">
-            <span id="heading_span"
-                style="font-size: 40px;  font-weight: bolder; font-family: Georgia, 'Times New Roman', Times, serif;">Dashboard</span>
+    <nav id="navbaar">
+        <div class="containr">
+            <span id="heading_span">Dashboard</span>
             <span>
                 <span class="img_span">
-                    <span id="loggedInUser_name" style=" font-size: 30px;"></span>
-                    <span style="visibility: hidden;">vdcff</span>
-                    <img src="pic.png" alt="profile" title="go to your profile"
-                        style="width: 60px;height: 60px; border-radius: 50%;">
+                    <span id="loggedInUser_name"></span>
+                    <span style="visibility: hidden;">vdc</span>
+                    <img id="profile_img" src="pic.png" alt="profile" title="go to your profile">
                     <span style="visibility: hidden;">vd</span>
+                    <span class="dropdown-center">
+                        <button id="dots_icon" class="btn btn-secondary dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false"
+                            style="background-color: rgb(167, 167, 247);border: none;color: black;" id="dots_icon">
+                            <span id="icons">
+                                <i class="fa-solid fa-ellipsis-v"></i></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item" id="signout-btn">
+                                <i class="fa-solid fa-right-from-bracket" style="color: red;"></i>
+                                Sign out
+                            </li>
+                            <!-- <li><a class="dropdown-item" href="javascript:void(0)">Action two</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0)">Action three</a></li> -->
+                        </ul>
+                    </span>
+                    <!-- <span id="icons"><i class="fa fa-bars" aria-hidden="true"></i></span> -->
+                    <!-- <span style="visibility: hidden;">vdas</span> -->
                 </span>
-
         </div>
 
     </nav>
-    <div id="navigation_links"
-        style="width: 300px; height: auto; background-color: rgb(101, 98, 133);margin-left: 500px; display: flex;text-align: center;justify-content: space-between;text-align: center; ">
-        <div class="hovering" id="uers_page" style="font-size: 30px;font-weight: bold; " >All Users</div>
+    <div id="navegation_links">
+        <button id="uers_page" title="click go to users page">All
+            Users</button>
         <!-- <hr> -->
-        <div class="hovering" id="profile_page" style="font-size: 30px;font-weight: bold;" >Your Profile</div>
+        <button id="profile_page" title="click go to your profile">Your
+            Profile</button>
     </div>
-    <button id="signout-btn">Sign out</button>
+    <!-- <button id="signout-btn">Sign out</button> -->
     <br> <br>
     <input type="text" id="post-inp">
     <button id="add">add</button>
 
     <h1>All posts of users</h1>
-    <div id="allPosts"></div>
+    <div id="parent_allPosts"></div><div id="allPosts"></div></div>
     <h1>My posts</h1>
     <div id="mmyPostDiv"></div>
-    
-    <!-- <div class="dropdown-center">
+
+    <!-- <i class="fa-sharp fa-solid fa-user">fgsdd</i>
+    <i class="fa-2x fa-solid fa-shake">shaking</i>
+    <i class="fa-2x fa-solid fa-fade" style="color: Orange;">blinking</i>
+    <i class="fa-solid fa-circle-plus fa-beat">baeting </i>
+    <li><span class="fa-li"><i class="fa-solid fa-check-square"></i></span>
+    </li>
+    <i class="fa-solid fa-circle-pting"> </i> -->
+    <!-- 
+    <div class="dropdown-center">
         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Centered dropdown
+            <span id="icons"><i class="fa fa-bars" aria-hidden="true"></i></span>
         </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Action two</a></li>
-          <li><a class="dropdown-item" href="#">Action three</a></li>
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Action two</a></li>
+            <li><a class="dropdown-item" href="#">Action three</a></li>
         </ul>
-      </div> -->
+    </div> -->
 
 
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
     <script type="module" src="./dashboard.js"></script>
 </body>
 
