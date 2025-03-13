@@ -15,7 +15,14 @@ import {
   getDoc,
 } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 // import { addDoc, collection } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-import { signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { signOut, getAuth, deleteUser } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+const d = new Date();
+// console.log(d)
+var exact = d.toString().slice(0, 21);
+var exactTime = exact +" min";
+// console.log(exactTime);
+
 let signOutFun = async () => {
   await signOut(auth).then(() => {
     console.log('logged out');
@@ -30,6 +37,13 @@ document.querySelector('#signout-btn').addEventListener('click', () => {
   signOutFun().then(() => {
     localStorage.removeItem("loggedInUser")
     window.location.replace("../login/login.html");
+  })
+});
+document.querySelector('#delete_account').addEventListener('click', () => {
+   user_accountDeleion().then(() => {
+    console.log("account deleted");
+    localStorage.removeItem("loggedInUser");
+    window.location.replace("../../index.html");
   })
 });
 // let updatePost = async (post_id) => {
@@ -47,12 +61,34 @@ document.querySelector('#signout-btn').addEventListener('click', () => {
 //     console.error(error)
 //   }
 // };
-
-let createPost = async (loggedIn_user, text) => {
+var postCreating_user ;
+var postCreating_user_img_url;
+let createPost = async (loggedIn_user, text ) => {
+  try {
+    // console.log(loggedInUser);
+    const q = query(collection(db, "users"), where("uid", "==", loggedInUser));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((users) => {
+      console.log(querySnapshot);
+      console.log(users.id, users.data(),users.data().displayName);
+      // console.log(q);
+      var postCreatingUser = users.data().displayName ;
+       postCreating_user = postCreatingUser
+      console.log(postCreating_user);
+     var user_img = users.data().photoURL;
+     postCreating_user_img_url = user_img ;
+     
+    });
+  } catch (error) {
+    console.error(error);
+  }
   try {
     const docRef = await addDoc(collection( db,"posts"), {
       postText: text,
       uid: loggedIn_user,
+      displayName : postCreating_user,
+      photoURL :  postCreating_user_img_url ,
+      time:exactTime,
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (error) {
@@ -79,18 +115,18 @@ let getloggedInUser = async () => {
       // console.log(loggedInUser);
       const q = query(collection(db, "users"), where("uid", "==", loggedInUser));
       const querySnapshot = await getDocs(q);
-      // myPostDiv.innerHTML = ''
-      // console.log(loggedInUser);
       querySnapshot.forEach((users) => {
         console.log(querySnapshot);
-        // console.log(loggedInUser);
-        // post.data() is never undefined for query post snapshots
         console.log(users.id, users.data(),users.data().displayName);
         // console.log(q);
         var loggedInUser_Name = users.data().displayName ;
         console.log(loggedInUser_Name);
         var loggedInUser_name = document.querySelector("#loggedInUser_name");
         loggedInUser_name.innerHTML = `Hello   ${loggedInUser_Name}`
+
+        var loggedInUser_img = users.data().photoURL;
+        var loggedInUser_profile = document.querySelector("#profile_img");
+        loggedInUser_profile.setAttribute("src",loggedInUser_img);  
         // myPostDiv.innerHTML += `${post.data().postText}
         //   <button id='${post.id}' class='update-btn'>edit</button>
         //   <br>`;
@@ -108,6 +144,10 @@ let getloggedInUser = async () => {
     }
   };
   getloggedInUser();
+  function getProfilePicture(username) {
+    const baseUrl = 'https://api.dicebear.com/7.x/identicon/svg?seed=';
+    return `${baseUrl}${encodeURIComponent(username)}`;
+}
 
 let getAllPosts = async () => {
   try {
@@ -115,7 +155,31 @@ let getAllPosts = async () => {
     posts.forEach((post) => {
       console.log(post.data());
     var  allPostDiv = document.querySelector("#allPosts")
-      allPostDiv.innerHTML += `<div>${post.data().postText}</div>
+      allPostDiv.innerHTML += `<div id="user_data_span">
+      <span id="user_pic">
+      <img id="user_img" src="${post.data().photoURL}" title="see profile"" alt="profile Pic" title="go to profile">
+      </span>
+      <span id="user_name">
+      ${post.data().displayName}
+      </span>
+      <span id="time_span">
+      ${post.data().time}
+      </span>
+      </div>
+      <div  id="individual_post">${post.data().postText}
+      </div>
+      <div id="like_comment_div">
+      <span id="like_status" title="see users">1</span>
+      <span id="like_span" >
+      like 
+      <i class="fa-solid fa-thumbs-up"></i>
+      </span>
+      <span id="comment_status" title="see users">1</span>
+      <span id="comment_span" title="see comments">
+      comment
+      <i class="fa-solid fa-comment"></i>
+      </span>
+      </div>
         <br>`;
     });
   } catch (error) {
@@ -146,13 +210,34 @@ var myPostDiv = document.querySelector("#myPostDiv");
 //   }
 // };
 // getMyPosts();
+
+let user_accountDeleion = async() =>{
+  try {
+    const auth = getAuth();
+const user = auth.currentUser;
+console.log( user)
+console.log( auth)
+if (! user) {
+ alert("plzz re login and then delete account.");
+  return;
+}
+ await deleteUser(user).then(() => {
+  // User deleted.
+})
+
+  } catch (error) {
+
+    console.log(error);
+  }
+}
+//  await user_accountDeleion();
 document.querySelector("#add").addEventListener("click", () => {
   let postTxt = document.querySelector("#post-inp").value;
   console.log(postTxt);
   createPost(loggedInUser, postTxt );
   postTxt = "";
 });
-document.querySelector("#profile_page").addEventListener("click",() => {
+document.querySelector("#create_post_span").addEventListener("click",() => {
   window.location.assign("./profile/profile.html");
 });
 document.querySelector("#uers_page").addEventListener("click",() => {

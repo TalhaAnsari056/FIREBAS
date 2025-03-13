@@ -1,5 +1,5 @@
-import { signInWithEmailAndPassword, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-import { auth,db, provider, GoogleAuthProvider } from "/firebaseSetup.js";
+import { signInWithEmailAndPassword, signInWithPopup,getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { auth, db, provider, GoogleAuthProvider } from "../../firebaseSetup.js";
 // import {
 //   addDoc,
 //   collection,
@@ -35,15 +35,19 @@ document.querySelector("#google-signUp").addEventListener('click', () => {
     });
   // getloggedInUser();
 })
-let emailValue = document.querySelector("#email").value;
-let passwordValue = document.querySelector("#password").value;
+// let emailValue = document.querySelector("#email").value;
+// let passwordValue = document.querySelector("#password").value;
 let signIn = async (email, pass) => {
+  console.log(email);
+  console.log(pass);
   //   if((emailValue && passwordValue) === "" ){
   //     alert("plz fill all the feilds");
   // }
   await signInWithEmailAndPassword(auth, email, pass)
     .then((userCredential) => {
       // Signed in
+      console.log(email);
+      console.log(pass);
       console.log(userCredential);
       const user = userCredential.user;
       console.log("login success: ", user);
@@ -52,9 +56,11 @@ let signIn = async (email, pass) => {
       window.location.replace('../dashboard/dashboard.html');
     })
     .catch((error) => {
+      console.log(email);
+      console.log(pass);
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.error(errorCode, errorMessage);
+      console.error(error, errorCode, errorMessage);
     });
 };
 // signIn()
@@ -62,6 +68,8 @@ let signIn = async (email, pass) => {
 document.querySelector('#login-btn').addEventListener('click', () => {
   var emailValue = document.querySelector('#email').value;
   var passwordValue = document.querySelector('#password').value;
+  console.log(emailValue);
+  console.log(passwordValue);
   // console.log(emailValue,passwordValue);
   signIn(emailValue, passwordValue);
 });
@@ -69,4 +77,27 @@ document.querySelector("#creatAccount_btn").addEventListener("click", () => {
   localStorage.removeItem("loggedInUser")
   window.location.replace("../../index.html");
 
-})
+});
+// let passwordReset =  async (email)=>{
+  
+//   const auth = getAuth();
+//  await sendPasswordResetEmail(auth, email)
+//   .then(() => {
+//     // Password reset email sent!
+//     // ..
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     console.log(error);
+//     console.log(errorCode );
+//     console.log(errorMessage);
+//     // ..
+//   });
+
+// }
+// var reset = "talhaansariryk@gmail.com"
+//  await passwordReset(reset);
+// document.querySelector("#reset_pass").addEventListener("click" , () => {
+
+// })

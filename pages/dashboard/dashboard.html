@@ -58,6 +58,8 @@
         width: 60px;
         height: 60px;
         border-radius: 50%;
+        font-size: 17px !important;
+        border: 0.5px solid black;
     }
 
     /* .btn btn-secondary dropdown-toggle{
@@ -67,17 +69,40 @@
 } */
     #navegation_links {
         width: 300px;
-        height: 65px;
-        /* background-color: rgb(101, 98, 133); */
-        margin-left: 500px;
-        display: flex;
+        /* height: 50px; */
+        background-color: rgb(167, 167, 247);
+        /* margin-left: 100px; */
         /* text-align: center; */
+        display: flex;
         justify-content: space-between;
-        border: none !important
+        text-align: center;
+        border: none ;
+        gap: 30px;
+    }
+#create_post_icon_span{
+    font-size: 23px;
+    text-align: center;
+}
+    #create_post_span:hover {
+        background-color: rgb(114, 114, 216);
+        transition: 0.8s;
+        cursor: pointer;
     }
 
-    #profile_page:hover {
-        background-color: rgb(33, 204, 147);
+    #create_post_span {
+        font-size: 20px;
+        font-weight: bold;
+        width: 50%;
+        height: 65px;
+        border: none;
+        display: flex;
+       align-items: center;
+       gap: 15px;
+        /* text-align: center; */
+    }
+
+    #my-post_page:hover {
+        background-color: rgb(114, 114, 216);
         cursor: pointer;
         /* text-decoration: underline; */
         transition: 0.8s;
@@ -86,7 +111,7 @@
     }
 
     #uers_page:hover {
-        background-color: rgb(33, 204, 147);
+        background-color: rgb(114, 114, 216);
         transition: 0.8s;
         cursor: pointer;
         /* text-decoration: underline; */
@@ -94,19 +119,23 @@
     }
 
     #uers_page {
-        font-size: 25px;
-        font-weight: bold;
-        width: 400px;
+        font-size: 20px;
+        font-weight: 300px !important;
+        width: 600px;
         height: 65px;
         border: none;
+        display: flex;
+       align-items: center;
     }
 
-    #profile_page {
-        font-size: 25px;
-        font-weight: bold;
-        width: 500px;
+    #my-post_page {
+        font-size: 20px;
+        font-weight: 150px;
+        width: 700px;
         height: 65px;
         border: none;
+        display: flex;
+       align-items: center;
     }
 
     img:hover {
@@ -116,25 +145,164 @@
     }
 
     #dots_icon:hover {
-            opacity: 0.5!important;
-            border: 0.5px solid black !important;
-            border-radius: 80%;
-            transition: 0.6s!important;
+        opacity: 0.5 !important;
+        border: 0.5px solid black !important;
+        border-radius: 80%;
+        transition: 0.6s !important;
 
-        }
-        #allPosts{
-            text-align: center;
-            font-size: 25px;
-            margin-top: 0px;
-            width: 500px;
-            height: auto;
-            /* border: 1px solid black; */
-            box-shadow: 5px 5px 10px rgb(204, 169, 116);;
-            border-radius: 30px;
-            position:absolute;
-            background-color: blanchedalmond;
+    }
 
-        }
+    #allPosts {
+        text-align: center;
+        font-size: 25px;
+        margin-top: 0px;
+        width: 100%;
+        height: auto;
+        /* border: 1px solid black; */
+        /* box-shadow: 5px 5px 10px rgb(204, 169, 116); */
+        ;
+        /* border-radius: 30px; */
+        /* position: absolute; */
+        background-color: #F0EFEF;
+
+    }
+
+    #individual_post {
+        width: 60%;
+        height: 300px;
+        background-color: #D3D3D3;
+
+
+
+    }
+
+    #allPosts {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #user_data_span {
+        width: 60%;
+        height: 70px;
+        background-color: #A9A9A9;
+        border-radius: 20px 20px 0px 0px;
+        /* display: flex;
+        align-items: center;
+        text-align: center; 
+        justify-content: center;  */
+    }
+
+    #like_comment_div {
+        width: 60%;
+        height: 70px;
+        background-color: #A9A9A9;
+        border-radius: 0px 0px 20px 20px;
+        display: flex;
+        /* justify-content: space-around; */
+        /* gap: 50px; */
+        align-items: center;
+        /* text-align: center; */
+
+    }
+
+    #like_status:hover {
+        transform: scaleY(2);
+        transform: scaleX(1.2);
+        box-shadow: 5px 5px 5px;
+        transition: 0.5s;
+    }
+
+    #like_status {
+        margin-left: 30px;
+        border: 0.5px solid black;
+        border-radius: 50%;
+        width: 30px;
+        cursor: pointer;
+        font-size: 20px;
+        background-color: rgb(138, 138, 241);
+        color: rgb(2, 2, 109);
+    }
+
+    #like_span {
+        cursor: pointer;
+        /* border: 1px solid black; */
+        width: 150px;
+
+    }
+
+    #like_span:hover {
+        transform: scaleY(1.7);
+        transform: scaleX(1.2);
+        transition: 0.5s;
+        text-decoration: underline;
+
+    }
+
+    #comment_status:hover {
+        transform: scaleY(2);
+        transform: scaleX(1.2);
+        box-shadow: 5px 5px 5px;
+        transition: 0.5s;
+    }
+
+    #comment_status {
+        margin-left: 90px;
+        border: 0.5px solid black;
+        border-radius: 50%;
+        width: 30px;
+        cursor: pointer;
+        font-size: 20px;
+        background-color: rgb(138, 138, 241);
+        color: rgb(2, 2, 109);
+    }
+
+
+    #comment_span:hover {
+        transform: scaleY(1.7);
+        transform: scaleX(1.2);
+        transition: 0.5s;
+        text-decoration: underline;
+
+    }
+
+    #comment_span {
+        cursor: pointer;
+        width: 200px;
+        margin-left: 10px;
+    }
+
+    #user_img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-top: 10px;
+        margin-left: 15px;
+        font-size: 17px !important;
+        border: 0.5px solid black;
+    }
+
+    #user_name {
+
+        margin-top: 15px;
+        margin-right: 50px;
+        /* margin-left: 20px; */
+        width: 800px;
+
+    }
+
+    #user_data_span {
+        display: flex;
+        /* justify-content: center; */
+        /* text-align: center; */
+    }
+
+    #time_span {
+        font-size: 15px;
+        margin-top: 5px;
+        margin-left: 150px;
+    }
 
 
     @media (max-width: 900px) {
@@ -179,13 +347,14 @@
             align-items: center;
             padding: 10px 0;
         }
+
         /* Stack buttons vertically */
         #uers_page,
         #profile_page {
             width: 90%;
             height: 50px;
             font-size: 20px;
-            margin: 5px 0;
+            /* margin: 5px 0; */
         }
     }
 </style>
@@ -194,11 +363,26 @@
     <nav id="navbaar">
         <div class="containr">
             <span id="heading_span">Dashboard</span>
+            <span id="navegation_links">
+                <span id="uers_page" title="click go to users page">All
+                    Users</span>
+                <span id="my-post_page" title="click go to your posts">
+                   My Posts</span>
+                <span id="create_post_span">
+                    <span id="create_post_icon_span">
+                        <i class="fas fa-plus-square" ></i>
+                    </span>
+                    <span id="create_post_text_span" title="click to create post">
+                        Create Post
+                    </span>
+                </span>
+            </span>
+            </span>
             <span>
                 <span class="img_span">
                     <span id="loggedInUser_name"></span>
                     <span style="visibility: hidden;">vdc</span>
-                    <img id="profile_img" src="pic.png" alt="profile" title="go to your profile">
+                    <img id="profile_img" alt="profile" title="go to your profile">
                     <span style="visibility: hidden;">vd</span>
                     <span class="dropdown-center">
                         <button id="dots_icon" class="btn btn-secondary dropdown-toggle" type="button"
@@ -212,6 +396,10 @@
                                 <i class="fa-solid fa-right-from-bracket" style="color: red;"></i>
                                 Sign out
                             </li>
+                            <li class="dropdown-item" id="delete_account">
+                                <i class="fa-solid fa-user-slash" style="color: rgb(102, 5, 5);"></i>
+                                Delete Account
+                            </li>
                             <!-- <li><a class="dropdown-item" href="javascript:void(0)">Action two</a></li>
                             <li><a class="dropdown-item" href="javascript:void(0)">Action three</a></li> -->
                         </ul>
@@ -222,22 +410,16 @@
         </div>
 
     </nav>
-    <div id="navegation_links">
-        <button id="uers_page" title="click go to users page">All
-            Users</button>
-        <!-- <hr> -->
-        <button id="profile_page" title="click go to your profile">Your
-            Profile</button>
+    <!-- <h1>All posts of users</h1> -->
+    <div id="parent_allPosts">
+        <div id="allPosts">
+            <br><br>
+        </div>
     </div>
-    <!-- <button id="signout-btn">Sign out</button> -->
-    <br> <br>
     <input type="text" id="post-inp">
     <button id="add">add</button>
-
-    <h1>All posts of users</h1>
-    <div id="parent_allPosts"></div><div id="allPosts"></div></div>
-    <h1>My posts</h1>
-    <div id="mmyPostDiv"></div>
+    <!-- <h1>My posts</h1>
+    <div id="mmyPostDiv"></div> -->
 
     <!-- <i class="fa-sharp fa-solid fa-user">fgsdd</i>
     <i class="fa-2x fa-solid fa-shake">shaking</i>

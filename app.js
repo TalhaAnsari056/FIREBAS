@@ -10,15 +10,16 @@ document.querySelector("#already_btn").addEventListener("click", () => {
 if (localStorage.getItem('loggedInUser')) {
     window.location.replace("./pages/login/login.html");
 }
-let pushUserData = async (user, d_name, F_no) => {
+let pushUserData = async (user, d_name, F_no ,user_img) => {
     try {
         const docRef = await addDoc(collection(db, "users"), {
 
             email: user.email,
-            photoURL: user.photoURL,
+            photoURL: user_img,
             displayName: d_name,
             phoneNumber: F_no,
             uid: user.uid,
+           
         });
         console.log('document Id', docRef.id);
     } catch (e) {
@@ -41,7 +42,10 @@ let pushUserData_byGoogle = async (user) => {
     }
 }
 
+
 let userSignUp = async (email, password) => {
+    console.log(email);
+    console.log( password);
     await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed up
@@ -51,11 +55,20 @@ let userSignUp = async (email, password) => {
 
             let displayName = document.querySelector("#name").value;
             let phoneNo = document.querySelector("#phoneNo").value;
+            console.log(displayName);
+            function getProfilePicture(username) {
+                const baseUrl = 'https://api.dicebear.com/7.x/identicon/svg?seed=';
+                return `${baseUrl}${encodeURIComponent(username)}`;
+            }
+            
+            // Example usage
+            const username = displayName;
+            const profilePicUrl = getProfilePicture(username);
             // if (displayName || phoneNo === "") {
             //     alert("plz fill all the feilds");
             //     return;
             // }
-            pushUserData(user, displayName, phoneNo).then(() => {
+            pushUserData(user, displayName, phoneNo ,profilePicUrl).then(() => {
                 window.location.replace("./pages/dashboard/dashboard.html");
                 localStorage.setItem("loggedInUser", user.uid);
                 // console.log("pushed");
@@ -70,14 +83,16 @@ let userSignUp = async (email, password) => {
 }
 
 
-var emailValue = document.querySelector("#email").value;
-var passwordValue = document.querySelector("#password").value;
+
 const signUp_btn = document.getElementById("signUp-btn");
 signUp_btn.addEventListener("click", (event) => {
     event.target.setAttribute("style", "opacity:0.5");
     setTimeout(() => {
         event.target.removeAttribute("style");
     }, 200);
+    
+    var emailValue = document.querySelector("#email").value;
+    var passwordValue = document.querySelector("#password").value;
 
     // if (emailValue || passwordValue === "") {
     //     alert("plz fill all the feilds");

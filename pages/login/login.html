@@ -10,6 +10,11 @@
       display: flex;
       justify-content: center;
     } */
+    #reset_pass {
+      color: blanchedalmond;
+      cursor: pointer;
+    }
+
     .error {
       color: black;
       font-size: 1.2em;
@@ -59,7 +64,8 @@
 <body>
 
   <div class="container"></div>
-  <h1 style="margin-left: 370px; font-size: 35px; color: rgb(233, 175, 175);">Login with registered email and password</h1>
+  <h1 style="margin-left: 370px; font-size: 35px; color: rgb(233, 175, 175);">Login with registered email and password
+  </h1>
   <div class="main">
     <div class="form">
       <form><br><br>
@@ -67,18 +73,20 @@
         <input id="email" type="text" placeholder="enter email" onInput="checkEmail()" required>
         <span class="error"></span></br></br>
         <input id="password" type="password" placeholder="enter password" onInput="checkPass()" required>
-        <span class="error"></span></br></br>
+        <span class="error"></span></br>
+        <!-- <span id="reset_pass">reset password</span> -->
+        </br>
       </form><br>
       <button id="login-btn"><br>
         <!-- <button id="signUp-btn" onclick="signUpWithEmailPass(event)"><br> -->
         login
       </button>
       <button id="google-signUp">
-        sign In with Google
+        Log In with Google
       </button> <br> <br>
       <button id="creatAccount_btn">Creat Account</button>
-      
-     
+
+
       <br>
     </div>
 
